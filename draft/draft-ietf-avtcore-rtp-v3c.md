@@ -1,8 +1,8 @@
 ---
 title: RTP Payload Format for Visual Volumetric Video-based Coding (V3C)
 abbrev: RTP payload format for V3C
-docname: draft-ietf-avtcore-rtp-v3c-16
-date: 2026-01-28
+docname: draft-ietf-avtcore-rtp-v3c-17
+date: 2026-02-11
 
 ipr: trust200902
 area: Application
@@ -409,7 +409,9 @@ The first two bytes of the payload of an RTP packet are referred to as the paylo
 ~~~
 {: #fig-RTP-payload-header title="RTP Payload Header"}
 
-F: the nal_forbidden_zero_bit as specified in {{ISO.IEC.23090-5}} is equal to 0. A value equal to 1 indicates that the payload may contain errors or syntax violations.
+F: the nal_forbidden_zero_bit as specified in {{ISO.IEC.23090-5}} is equal to 0. A value equal to 1 indicates that the payload may contain errors or syntax violations. 
+
+Media processing elements in the network that are capable of deep packet inspection SHOULD set the F bit to 1 to indicate detected bit errors in the NAL unit(s). A receiver reaction to an RTP payload header in which the F bit is equal to 1 is to discard such RTP packet and to conceal the lost data in the discarded NAL unit(s).
 
 NUT: the nal_unit_type as specified in {{ISO.IEC.23090-5}} defines the type of the RBSP data structure contained in the NAL unit payload. The NUT value could carry other meaning depending on the RTP packet type.
 
